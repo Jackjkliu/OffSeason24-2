@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.EK10582.test;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
@@ -15,6 +16,7 @@ public class CameraTesting extends AutonBase {
     public void runOpMode() {
 
         waitForStart();
+
 
         SpikePositionsBlue pos = SpikePipeline.spikePositionB;
 

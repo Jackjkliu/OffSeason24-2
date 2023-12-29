@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.EK10582.subsystem;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Rect;
@@ -19,8 +21,8 @@ public class SpikePipeline extends OpenCvPipeline {
 
     public static SpikePositionsBlue spikePositionB = SpikePositionsBlue.NA;
     public static SpikePositionsRed spikePositionR = SpikePositionsRed.NA;
-    double[] targetBlueRGB = {12, 135, 176};
-    double[] targetRedRGB = {156,30,33};
+    double[] targetBlueRGB = {38, 135, 176};
+    double[] targetRedRGB = {156,50,50};
     double[] replacementColor = {0, 255, 0, 1};
 
     double percentErrorRed = 0.4;
@@ -32,6 +34,7 @@ public class SpikePipeline extends OpenCvPipeline {
 
     @Override
     public Mat processFrame(Mat input) {
+        FtcDashboard.getInstance().startCameraStream(Robot.getInstance().webcam, 0);
 
         Size dimensions = input.size();
         double height = dimensions.height;
