@@ -54,6 +54,7 @@ public class Robot {
     public Servo intakeArm;
 
     public Servo pixelHolder;
+
     public Servo dumper;
 
     public WebcamName camera;
@@ -87,60 +88,60 @@ public class Robot {
     public void init(HardwareMap hardwareMap, LinearOpMode linearOpMode) {
         this.hardwareMap = hardwareMap;
         this.linearOpMode = (EKLinear)linearOpMode;
+//
+//        leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
+//        leftBack = hardwareMap.get(DcMotorEx.class, "leftBack");
+//        rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
+//        rightBack = hardwareMap.get(DcMotorEx.class, "rightBack");
+//
+//        leftFront.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+//        leftBack.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+//        rightFront.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+//        rightBack.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-        leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
-        leftBack = hardwareMap.get(DcMotorEx.class, "leftBack");
-        rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
-        rightBack = hardwareMap.get(DcMotorEx.class, "rightBack");
+//        slide1 = hardwareMap.get(DcMotorEx.class, "slide1");
+//        slide2 = hardwareMap.get(DcMotorEx.class, "slide2");
+//        slide1.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+//        slide2.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+//        slide1.setTargetPosition(0);
+//        slide2.setTargetPosition(0);
+//        slide1.setDirection(DcMotorSimple.Direction.REVERSE);
+//
+//        slide1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        slide2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        leftFront.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        leftBack.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        rightFront.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        rightBack.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-
-        slide1 = hardwareMap.get(DcMotorEx.class, "slide1");
-        slide2 = hardwareMap.get(DcMotorEx.class, "slide2");
-        slide1.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-        slide2.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-        slide1.setTargetPosition(0);
-        slide2.setTargetPosition(0);
-        slide1.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        slide1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        slide2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
+//        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+//        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
 //
-        intakeArm = hardwareMap.get(Servo.class, "intakeArm");
-        camera = hardwareMap.get(WebcamName.class, "Webcam 1");
+//        intakeArm = hardwareMap.get(Servo.class, "intakeArm");
+//        camera = hardwareMap.get(WebcamName.class, "Webcam 1");
+//
+//        dumper = hardwareMap.get(Servo.class, "dumper");
+//        pixelHolder = hardwareMap.get(Servo.class, "pixelHolder");
+//        intakeSpin = hardwareMap.get(DcMotorEx.class, "intakeSpin");
+//        odo = hardwareMap.get(DcMotorEx.class, "odo");
 
-        dumper = hardwareMap.get(Servo.class, "dumper");
-        pixelHolder = hardwareMap.get(Servo.class, "pixelHolder");
-        intakeSpin = hardwareMap.get(DcMotorEx.class, "intakeSpin");
-        odo = hardwareMap.get(DcMotorEx.class, "odo");
 
+//        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+//        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
 
-        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+//        imu = hardwareMap.get(BHI260IMU.class, "imu");
+//
+//        //.Parameters refers to a nested class within BNO055IMU
+//        //.Parameters class has more methods and uses specific to our use of imu
+//        BHI260IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.RIGHT, RevHubOrientationOnRobot.UsbFacingDirection.UP));
+//
+//        //sets parameter obj to another nested class called AngleUnit to increase capabilities
+//        imu.initialize(parameters);
+//        imu.resetYaw();
 
-        imu = hardwareMap.get(BHI260IMU.class, "imu");
-
-        //.Parameters refers to a nested class within BNO055IMU
-        //.Parameters class has more methods and uses specific to our use of imu
-        BHI260IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.RIGHT, RevHubOrientationOnRobot.UsbFacingDirection.UP));
-
-        //sets parameter obj to another nested class called AngleUnit to increase capabilities
-        imu.initialize(parameters);
-        imu.resetYaw();
-
-        roadRunner = new SampleMecanumDrive(hardwareMap);
-
-        for(Subsystem subsystem : subsystems) {
-            //initialize the subsystems
-            subsystem.init(false); //change this
-        }
+//        roadRunner = new SampleMecanumDrive(hardwareMap);
+//
+//        for(Subsystem subsystem : subsystems) {
+//            //initialize the subsystems
+//            subsystem.init(false); //change this
+//        }
 
 
         cycleTimer.reset();
