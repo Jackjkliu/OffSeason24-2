@@ -20,12 +20,21 @@ public class BlueBottomMeepMeep {
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
                 .setColorScheme(new ColorSchemeBlueDark())
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(-36,60, Math.toRadians(-90)))
+                        drive.trajectorySequenceBuilder(new Pose2d(-36,60, Math.toRadians(90)))
+                                .back(25)
+                                .forward(10)
+                                .strafeLeft(18)
+                                .back(38)
 
-
-                                .lineToLinearHeading(new Pose2d(-35,32, Math.toRadians(180)))
+                                /*  .lineToLinearHeading(new Pose2d(-36,34, Math.toRadians(90)))
+                                .turn(Math.toRadians(90))
                                 .back(4)
                                 .forward(4)
+
+                                .strafeLeft(10)
+                                .lineToLinearHeading(new Pose2d(-46,38, Math.toRadians(90)))
+                                .forward(20)
+                                .strafeRight(10)*/
 
                                 .lineToLinearHeading(new Pose2d(-30,8, Math.toRadians(180)))
                                 .lineToLinearHeading(new Pose2d(10,8, Math.toRadians(180)))
