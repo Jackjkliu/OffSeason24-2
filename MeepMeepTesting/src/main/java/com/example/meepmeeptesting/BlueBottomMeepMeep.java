@@ -9,6 +9,8 @@ import com.noahbres.meepmeep.core.colorscheme.scheme.ColorSchemeBlueDark;
 import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 
+import java.util.Vector;
+
 public class BlueBottomMeepMeep {
 
     public static void main(String[] args) {
@@ -20,28 +22,87 @@ public class BlueBottomMeepMeep {
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
                 .setColorScheme(new ColorSchemeBlueDark())
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(-36,60, Math.toRadians(90)))
-                                .back(25)
+                        drive.trajectorySequenceBuilder(new Pose2d(-36,-60, Math.toRadians(90)))
+                             /* BBM   .back(25)
                                 .forward(10)
-                                .strafeLeft(18)
-                                .back(38)
+                                .splineToConstantHeading(new Vector2d(-54,24),Math.toRadians(-90))
+                                .splineToLinearHeading(new Pose2d(-30,8, Math.toRadians(90)),Math.toRadians(0))
+                                .turn(Math.toRadians(-90))
+                                .lineToConstantHeading(new Vector2d(15,8))
+                                .splineToLinearHeading(new Pose2d(40,36,Math.toRadians(180)), Math.toRadians(0))
+                                .lineToSplineHeading(new Pose2d(52, 36, Math.toRadians(180)))
+                                .forward(6)
+                                .lineTo(new Vector2d(46, 60))
+                                .lineTo(new Vector2d(60, 60)) */
 
-                                /*  .lineToLinearHeading(new Pose2d(-36,34, Math.toRadians(90)))
+                              /* RBM  .forward(25)
+                                .back(10)
+                                .splineToConstantHeading(new Vector2d(-54,-24),Math.toRadians(90))
+                                .splineToLinearHeading(new Pose2d(-30,-8, Math.toRadians(90)),Math.toRadians(180))
+                                .turn(Math.toRadians(-90))
+                                .lineToConstantHeading(new Vector2d(15,-8))
+                                .splineToLinearHeading(new Pose2d(40,-36,Math.toRadians(180)), Math.toRadians(0))
+                                .lineToSplineHeading(new Pose2d(52, -36, Math.toRadians(180)))
+                                .forward(6)
+                                .lineTo(new Vector2d(46, -60))
+                                .lineTo(new Vector2d(60, -60)) */
+
+                               /* BBR .lineToLinearHeading(new Pose2d(-36,34, Math.toRadians(90)))
                                 .turn(Math.toRadians(90))
                                 .back(4)
-                                .forward(4)
-
-                                .strafeLeft(10)
-                                .lineToLinearHeading(new Pose2d(-46,38, Math.toRadians(90)))
-                                .forward(20)
-                                .strafeRight(10)*/
-
-                                .lineToLinearHeading(new Pose2d(-30,8, Math.toRadians(180)))
-                                .lineToLinearHeading(new Pose2d(10,8, Math.toRadians(180)))
-                                .splineTo(new Vector2d(40,36), Math.toRadians(0))
+                                .forward(10)
+                                .lineToLinearHeading(new Pose2d(-36,8, Math.toRadians(0)))
+                                .lineToConstantHeading(new Vector2d(15,8))
+                                .splineToLinearHeading(new Pose2d(40,36,Math.toRadians(180)), Math.toRadians(0))
                                 .lineToSplineHeading(new Pose2d(52, 30, Math.toRadians(180)))
-                                .lineTo(new Vector2d(52, 60))
+                                .forward(6)
+                                .lineTo(new Vector2d(46, 60))
                                 .lineTo(new Vector2d(60, 60))
+                                */
+
+                                /* RBR   .lineToLinearHeading(new Pose2d(-36,-34, Math.toRadians(90)))
+                                .turn(Math.toRadians(90))
+                                .back(4)
+                                .forward(10)
+                                .lineToLinearHeading(new Pose2d(-36,-8, Math.toRadians(0)))
+                                .lineToConstantHeading(new Vector2d(15,-8))
+                                .splineToLinearHeading(new Pose2d(40,-36,Math.toRadians(180)), Math.toRadians(0))
+                                .lineToSplineHeading(new Pose2d(52, -42, Math.toRadians(180)))
+                                .forward(6)
+                                .lineTo(new Vector2d(46, -60))
+                                .lineTo(new Vector2d(60, -60))*/
+
+
+
+
+
+                               /*BBL  .strafeLeft(10)
+                                .lineToLinearHeading(new Pose2d(-46,38, Math.toRadians(90)))
+                                .forward(10)
+                                .strafeRight(10)
+                                .lineToLinearHeading(new Pose2d(-36,8, Math.toRadians(0)))
+                                .lineToConstantHeading(new Vector2d(15,8))
+                                .splineToLinearHeading(new Pose2d(40,36,Math.toRadians(180)), Math.toRadians(0))
+                                .lineToSplineHeading(new Pose2d(52, 42, Math.toRadians(180)))
+                                .forward(6)
+                                .lineTo(new Vector2d(46, 60))
+                                .lineTo(new Vector2d(60, 60)) */
+
+                             /* RBL   .strafeLeft(10)
+                                .lineToLinearHeading(new Pose2d(-46,-38, Math.toRadians(90)))
+                                .forward(10)
+                                .strafeRight(10)
+                                .lineToLinearHeading(new Pose2d(-36,-8, Math.toRadians(0)))
+                                .lineToConstantHeading(new Vector2d(15,-8))
+                                .splineToLinearHeading(new Pose2d(40,-36,Math.toRadians(180)), Math.toRadians(0))
+                                .lineToSplineHeading(new Pose2d(52, -30, Math.toRadians(180)))
+                                .forward(6)
+                                .lineTo(new Vector2d(46, -60))
+                                .lineTo(new Vector2d(60, -60))*/
+
+
+
+
                                 .build());
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
