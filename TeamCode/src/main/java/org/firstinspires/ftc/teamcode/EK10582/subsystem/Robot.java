@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.ImuOrientationOnRobot;
@@ -62,6 +63,8 @@ public class Robot {
     public WebcamName camera;
 
     public OpenCvWebcam webcam;
+
+    public DistanceSensor dSens;
 
 
     //Declare subsystems here: Ex. mecanumDrive, collection, slides, sorting, etc.
@@ -119,6 +122,8 @@ public class Robot {
 
 //
         camera = hardwareMap.get(WebcamName.class, "Webcam 1");
+
+        dSens = hardwareMap.get(DistanceSensor.class,"distance sensor");
 
         dumper = hardwareMap.get(Servo.class, "dumper");
         pixelHolder = hardwareMap.get(Servo.class, "pixelHolder");

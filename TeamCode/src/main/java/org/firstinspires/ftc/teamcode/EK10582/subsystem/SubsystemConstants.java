@@ -13,6 +13,8 @@ public class SubsystemConstants {
     public static final double[] housingpos = {.4, .5, .6, .5, .6};
     public static double housingIncrement = 0.001;
 
+    public static final int[] distanceInch = {0,2,4};
+
 //    public static double dumperTop = 1;
 //    public static double dumperBottom = 0.39;
 
