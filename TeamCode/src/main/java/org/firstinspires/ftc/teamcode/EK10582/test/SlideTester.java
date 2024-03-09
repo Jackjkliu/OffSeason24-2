@@ -14,6 +14,7 @@ public class SlideTester extends EKLinear {
 //
             robot.slides.joystickInput = driverStation.getSlidePower();
             robot.update();
+            telemetry.addData("Magnetic Limit Switch Condition", robot.slides.limitSwitchBool);
 
         }
     }

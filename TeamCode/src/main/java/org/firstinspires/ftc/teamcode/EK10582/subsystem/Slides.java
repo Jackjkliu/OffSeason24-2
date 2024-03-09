@@ -9,16 +9,19 @@ public class Slides extends Subsystem {
     public double joystickInput; // joystick input
     PIDController slidesPID = new PIDController(0.4, 0, 0);
 
+    public boolean limitSwitchBool;
+
     public SubsystemConstants.SlideStates currentState = SubsystemConstants.SlideStates.FREE;
 
     @Override
     public void init(boolean auton) {
         currentState = SubsystemConstants.SlideStates.FREE;
+        limitSwitchBool = Robot.getInstance().limitSwitch.isPressed();
     }
 
     @Override
     public void update(boolean auton) {
-        if(currentState == SubsystemConstants.SlideStates.FREE) {
+        if(currentState == SubsystemConstants.SlideStates.FREE && (!limitSwitchBool && Robot.getInstance().slide1.getVelocity() > 0)){
             setSlidesPower(joystickInput);
         } else {
             setSlidesLength(currentState.position);

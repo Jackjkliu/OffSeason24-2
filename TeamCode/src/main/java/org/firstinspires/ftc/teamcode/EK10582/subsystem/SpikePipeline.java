@@ -10,25 +10,9 @@ import org.openftc.easyopencv.OpenCvPipeline;
 
 public class SpikePipeline extends OpenCvPipeline {
 
-    public enum SpikePositionsBlue{
-        LEFT, RIGHT, MIDDLE, NA;
-    }
-    public enum SpikePositionsRed{
-        LEFT, RIGHT, MIDDLE, NA;
-    }
-
-    public static SpikePositionsBlue spikePositionB = SpikePositionsBlue.NA;
-    public static SpikePositionsRed spikePositionR = SpikePositionsRed.NA;
     double[] targetBlueRGB = {12, 135, 176};
     double[] targetRedRGB = {156,30,33};
-    double[] replacementColor = {0, 255, 0, 1};
 
-    double percentErrorRed = 0.4;
-    double percentErrorBlue = 0.6;
-
-
-    public static int maxBlue = 0;
-    public static int maxRed = 0;
 
     @Override
     public Mat processFrame(Mat input) {
@@ -37,69 +21,33 @@ public class SpikePipeline extends OpenCvPipeline {
         double height = dimensions.height;
         double width = dimensions.width;
 
-
-
         Mat output = input.clone();
 
+        Rect leftRect = new Rect();
 
-        Rect line1 = new Rect(new Point(width / 3, 0),new Point(2 * width / 3, height));
-        Imgproc.rectangle(output, line1, new Scalar(4,233,78),3,8);
+        for (int i = 0; i <= height; i++) {
+            for (int j = 0; j <= width; j++) {
+                double[] pixel = output.get(i, j);
+                double[] changeColor = {52, 171, 41};
+                pixel = compareColor(pixel, targetBlueRGB,changeColor);
 
-
-        int[] countersBlue = new int[3];
-        int[] countersRed = new int[3];
-
-        for (int i = 0; i < 3; i++) { //boxes
-            for(int j = 0; j < height; j++){ //height (all rows)
-                for(int k = (int) (width * i / 3); k < (width * (i + 1) / 3); k++){ //width (column)
-                    double[] currentColor = output.get(j,k); //color of each pixel
-                    if(compareColor(targetBlueRGB, currentColor, percentErrorBlue)){
-                        output.put(j,k, replacementColor); //if color is target color, change color
-                        countersBlue[i]++;
-                    }
-                    if(compareColor(targetRedRGB, currentColor,percentErrorRed)){
-                        output.put(j,k, replacementColor); //if color is target color, change color
-                        countersRed[i]++;
-                    }
-                }
+                double[] finalPixel = {pixel[0],pixel[1],pixel[2],1};
+                output.put(i,j,finalPixel);
             }
         }
-
-        maxBlue = 0;
-        for (int i = 1; i < 3; i++) {
-            if (countersBlue[i] > countersBlue[maxBlue])
-                maxBlue = i;
-            if (countersRed[i] > countersRed[maxRed])
-                maxRed = i;
-        }
-
-        switch(maxBlue){
-            case 0: spikePositionB = SpikePositionsBlue.LEFT;
-                break;
-            case 1: spikePositionB = SpikePositionsBlue.MIDDLE;
-                break;
-            case 2: spikePositionB = SpikePositionsBlue.RIGHT;
-                break;
-        }
-
-        switch(maxRed){
-            case 0: spikePositionR = SpikePositionsRed.LEFT;
-                break;
-            case 1: spikePositionR = SpikePositionsRed.MIDDLE;
-                break;
-            case 2: spikePositionR = SpikePositionsRed.RIGHT;
-                break;
-        }
-
         return output;
-
     }
 
-    public boolean compareColor(double[] targ, double[] cur, double percentError){
-        if (Math.abs(targ[0] - cur[0]) < percentError * targ[0] && Math.abs(targ[1] - cur[1]) < percentError*targ[1] && Math.abs(targ[2] - cur[2]) < percentError*targ[2]){
-            return true;
+    public double[] compareColor(double[] cur, double[] targetColor, double[] changeColor) {
+        int iterate = 0;
+        while (targetColor[iterate] * .8 < cur[iterate] && cur[iterate] < targetColor[iterate] * 1.2) {
+            iterate++;
         }
-        return false;
+        if(iterate == 2){
+            return changeColor;
+        }
+        return cur;
     }
-
 }
+
+

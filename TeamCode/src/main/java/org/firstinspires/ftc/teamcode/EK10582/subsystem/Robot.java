@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.ImuOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -66,6 +67,8 @@ public class Robot {
 
     public DistanceSensor dSens;
 
+    public TouchSensor limitSwitch;
+
 
     //Declare subsystems here: Ex. mecanumDrive, collection, slides, sorting, etc.
     public MecanumDrive mecanumDrive = new MecanumDrive();
@@ -76,6 +79,7 @@ public class Robot {
     public OpenCV openCV = new OpenCV();
     public Hanging hanging = new Hanging();
     public DroneLauncher droneLauncher = new DroneLauncher();
+
 
     //Add all subsystems to a list to be initiated and updated through
     //private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides, housing, openCV);
@@ -124,6 +128,8 @@ public class Robot {
         camera = hardwareMap.get(WebcamName.class, "Webcam 1");
 
         dSens = hardwareMap.get(DistanceSensor.class,"distance sensor");
+
+        limitSwitch = hardwareMap.get(TouchSensor.class, "Magnetic Limity");
 
         dumper = hardwareMap.get(Servo.class, "dumper");
         pixelHolder = hardwareMap.get(Servo.class, "pixelHolder");
