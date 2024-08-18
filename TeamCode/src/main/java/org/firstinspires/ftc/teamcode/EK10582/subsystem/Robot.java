@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.EK10582.subsystem;
 
 import com.qualcomm.hardware.bosch.BHI260IMU;
-import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -10,17 +9,12 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
-import com.qualcomm.robotcore.hardware.ImuOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 
 
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.EK10582.EKLinear;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.Action;
 import org.firstinspires.ftc.teamcode.RoadRunner.drive.SampleMecanumDrive;
@@ -67,21 +61,17 @@ public class Robot {
 
     //Declare subsystems here: Ex. mecanumDrive, collection, slides, sorting, etc.
     public MecanumDrive mecanumDrive = new MecanumDrive();
-    public Intake intake = new Intake();
-    public AprilTags aprilTags = new AprilTags();
+    public Claw intake = new Claw();
     public Slides slides = new Slides();
-    public Housing housing = new Housing();
     public OpenCV openCV = new OpenCV();
-    public Hanging hanging = new Hanging();
-    public DroneLauncher droneLauncher = new DroneLauncher();
 
     //Add all subsystems to a list to be initiated and updated through
     //private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides, housing, openCV);
-    public List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, openCV, slides, housing, hanging, droneLauncher, aprilTags);
+    public List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, openCV, slides);
 
     //add all subsystems that need to go through telemetry
 //    private List<Subsystem> telemetrySubsystems = Arrays.asList();
-    public List<Subsystem> telemetrySubsystems = Arrays.asList(aprilTags, mecanumDrive, intake, openCV, slides, housing, hanging, droneLauncher);
+    public List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, openCV, slides);
 
 
     //Creates an arraylist called actions that stores all the actions that are currently being done
