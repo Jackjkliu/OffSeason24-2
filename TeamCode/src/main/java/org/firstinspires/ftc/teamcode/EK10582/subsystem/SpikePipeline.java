@@ -11,26 +11,22 @@ import org.openftc.easyopencv.OpenCvPipeline;
 public class SpikePipeline extends OpenCvPipeline {
 
     public enum SleeveColors{
-        ORANGE, GREEN, PURPLE
+        ORANGE, GREEN, PURPLE, NA
     }
 
 
-    public static SpikePositionsBlue spikePositionB = SpikePositionsBlue.NA;
-    public static SpikePositionsRed spikePositionR = SpikePositionsRed.NA;
-
-    double[] targetBlueRGB = {127, 227, 235};
-    double[] targetYellowRGB = {252, 220, 8};
-    double[] targetPinkRGB = {235, 162, 216};
-    double[] replacementColor = {0, 255, 0, 1};
-
-    double percentErrorBlue = 0.5;
-    double percentErrorYellow = 0.6;
-    double percentErrorPink = 0;
+    public static SleeveColors sleeveColor = SleeveColors.NA; //setting the default color to NA
 
 
-    public static int maxBlue = 0;
-    public static int maxYellow = 0;
-    public static int maxPink = 0;
+    double[] targetOrangeRGB = {127, 227, 235}; //change this
+    double[] targetGreenRGB = {252, 220, 8}; //change this
+    double[] targetPurpleRGB = {235, 162, 216}; //change this
+    double[] replacementColor = {0, 255, 0, 1}; //4th value is a, a is transparency
+
+    double percentErrorOrange = 0.5;
+    double percentErrorGreen = 0.6;
+    double percentErrorPurple = 0.6;
+
 
     Mat output = new Mat();
 
@@ -50,54 +46,39 @@ public class SpikePipeline extends OpenCvPipeline {
         Imgproc.rectangle(output, line1, new Scalar(4,233,78),3,8);
 
 
-        int[] countersBlue = new int[3];
-        int[] countersRed = new int[3];
+        int countersOrange = 0;
+        int countersGreen = 0;
+        int countersPurple = 0;
 
         for (int i = 0; i < 3; i++) { //boxes
             for(int j = 0; j < height; j++){ //height (all rows)
                 for(int k = (int) (width * i / 3); k < (width * (i + 1) / 3); k++){ //width (column)
-                    double[] currentColor = output.get(j,k); //color of each pixel
-                    if(compareColor(targetBlueRGB, currentColor, percentErrorBlue)){
+                    double[] currentColor = output.get(j,k); //color of each pixel, checks the color of each individual pixel
+                    if(compareColor(targetOrangeRGB, currentColor, percentErrorOrange)){
                         output.put(j,k, replacementColor); //if color is target color, change color
-                        countersBlue[i]++;
+                        countersOrange++;
                     }
-                    if(compareColor(targetYellowRGB, currentColor,percentErrorYellow)){
+                    if(compareColor(targetGreenRGB, currentColor,percentErrorGreen)){
                         output.put(j,k, replacementColor); //if color is target color, change color
-                        countersRed[i]++;
+                        countersGreen++;
+                    }
+                    if(compareColor(targetPurpleRGB, currentColor, percentErrorPurple)){
+                        output.put(j,k, replacementColor); //if color is target color, change color
+                        countersPurple++;
+
                     }
                 }
             }
         }
-
-        maxPink = 0;
-        maxBlue = 0;
-        maxYellow = 0;
-        for (int i = 1; i < 3; i++) {
-            if (countersBlue[i] > countersBlue[maxBlue])
-                maxBlue = i;
-            if (countersPink[i] > countersRed[maxPink]) //make variables for countersPink and countersYellow
-                maxPink = i;
-            if()
+        if(countersOrange > countersGreen && countersOrange > countersPurple){
+            sleeveColor = SleeveColors.ORANGE;
         }
-
-        switch(maxBlue){ //remember to change the following section of code because theres only one case for each color
-            case 0: spikePositionB = SpikePositionsBlue.LEFT;
-                break;
-            case 1: spikePositionB = SpikePositionsBlue.MIDDLE;
-                break;
-            case 2: spikePositionB = SpikePositionsBlue.RIGHT;
-                break;
+        else if(countersGreen > countersPurple && countersGreen > countersOrange){
+            sleeveColor = SleeveColors.GREEN;
         }
-
-        switch(maxYellow){
-            case 0: spikePositionR = SpikePositionsRed.LEFT;
-                break;
-            case 1: spikePositionR = SpikePositionsRed.MIDDLE;
-                break;
-            case 2: spikePositionR = SpikePositionsRed.RIGHT;
-                break;
+        else if(countersPurple > countersGreen && countersPurple > countersOrange){
+            sleeveColor = SleeveColors.PURPLE;
         }
-        switch(maxPink){
 
         }
 
