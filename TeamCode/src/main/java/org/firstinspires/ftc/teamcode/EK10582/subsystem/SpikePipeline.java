@@ -10,26 +10,27 @@ import org.openftc.easyopencv.OpenCvPipeline;
 
 public class SpikePipeline extends OpenCvPipeline {
 
-    public enum SpikePositionsBlue{
-        LEFT, RIGHT, MIDDLE, NA;
+    public enum SleeveColors{
+        ORANGE, GREEN, PURPLE
     }
-    public enum SpikePositionsRed{
-        LEFT, RIGHT, MIDDLE, NA;
-    }
+
 
     public static SpikePositionsBlue spikePositionB = SpikePositionsBlue.NA;
     public static SpikePositionsRed spikePositionR = SpikePositionsRed.NA;
 
-    double[] targetBlueRGB = {28, 103, 173};
-    double[] targetRedRGB = {161,39.5,55.5};
+    double[] targetBlueRGB = {127, 227, 235};
+    double[] targetYellowRGB = {252, 220, 8};
+    double[] targetPinkRGB = {235, 162, 216};
     double[] replacementColor = {0, 255, 0, 1};
 
-    double percentErrorRed = 0.5;
-    double percentErrorBlue = 0.6;
+    double percentErrorBlue = 0.5;
+    double percentErrorYellow = 0.6;
+    double percentErrorPink = 0;
 
 
     public static int maxBlue = 0;
-    public static int maxRed = 0;
+    public static int maxYellow = 0;
+    public static int maxPink = 0;
 
     Mat output = new Mat();
 
@@ -60,7 +61,7 @@ public class SpikePipeline extends OpenCvPipeline {
                         output.put(j,k, replacementColor); //if color is target color, change color
                         countersBlue[i]++;
                     }
-                    if(compareColor(targetRedRGB, currentColor,percentErrorRed)){
+                    if(compareColor(targetYellowRGB, currentColor,percentErrorYellow)){
                         output.put(j,k, replacementColor); //if color is target color, change color
                         countersRed[i]++;
                     }
@@ -68,16 +69,18 @@ public class SpikePipeline extends OpenCvPipeline {
             }
         }
 
-        maxRed = 0;
+        maxPink = 0;
         maxBlue = 0;
+        maxYellow = 0;
         for (int i = 1; i < 3; i++) {
             if (countersBlue[i] > countersBlue[maxBlue])
                 maxBlue = i;
-            if (countersRed[i] > countersRed[maxRed])
-                maxRed = i;
+            if (countersPink[i] > countersRed[maxPink]) //make variables for countersPink and countersYellow
+                maxPink = i;
+            if()
         }
 
-        switch(maxBlue){
+        switch(maxBlue){ //remember to change the following section of code because theres only one case for each color
             case 0: spikePositionB = SpikePositionsBlue.LEFT;
                 break;
             case 1: spikePositionB = SpikePositionsBlue.MIDDLE;
@@ -86,13 +89,16 @@ public class SpikePipeline extends OpenCvPipeline {
                 break;
         }
 
-        switch(maxRed){
+        switch(maxYellow){
             case 0: spikePositionR = SpikePositionsRed.LEFT;
                 break;
             case 1: spikePositionR = SpikePositionsRed.MIDDLE;
                 break;
             case 2: spikePositionR = SpikePositionsRed.RIGHT;
                 break;
+        }
+        switch(maxPink){
+
         }
 
         return output;

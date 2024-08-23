@@ -24,7 +24,11 @@ public class Drive extends EKLinear {
             robot.mecanumDrive.rx = driverStation.getRotVel();
             robot.mecanumDrive.slowMode = driverStation.slowMode();
 
-            //intake
+            //claw
+            if(driverStation.getGamepad2A()){
+                robot.claw.moveClaw = true;
+            }
+            /*//intake
             robot.intake.intakeSpeed = driverStation.intakeOut(); //left trigger
             robot.intake.intakeBack = driverStation.intakeIn(); //right trigger
 
@@ -69,7 +73,7 @@ public class Drive extends EKLinear {
             }
 
             //hanging
-            robot.hanging.hangingPower = driverStation.getHangingPower() * 0.8;
+            /*robot.hanging.hangingPower = driverStation.getHangingPower() * 0.8;
             if(driverStation.getHangingServo()) {
 //                if(robot.hanging.currentState == SubsystemConstants.HangingStates.DOWN) {
 //                    robot.hanging.currentState = SubsystemConstants.HangingStates.UP;
@@ -77,7 +81,7 @@ public class Drive extends EKLinear {
 //                    robot.hanging.currentState = SubsystemConstants.HangingStates.DOWN;
 //                }
                 robot.addAction(new HangingSetup());
-            }
+            }*/
 
             //drone
             //telemetry.addData("droneButton", driverStation.getDroneDown());

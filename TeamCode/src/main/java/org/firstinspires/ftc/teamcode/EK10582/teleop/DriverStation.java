@@ -4,6 +4,9 @@ import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.EK10582.subsystem.Claw;
+import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
+//driver station is only for getting buttons on the gamepad
 @Config
 class JoystickConstants {
     public static double DEADZONE = 0.01;
@@ -35,20 +38,20 @@ public class DriverStation {
 
     //------put clampLeft, clampRight on controller 2, maybe dpad, buttons?? idk-------------
     boolean lateRight = false;
-    public boolean clampRight(){
+    /*public boolean clampRight(){
         boolean out;
         out = gamepad1.x && !lateRight;
         lateRight = gamepad1.x;
         return out;
-    }
+    }*/
 
-    boolean lateLeft = false;
+    /*boolean lateLeft = false;
     public boolean clampLeft(){
         boolean out;
         out = gamepad1.y && !lateLeft;
         lateLeft = gamepad1.y;
         return out;
-    }
+    }*/
 
     boolean lateRightBump = false;
     public boolean slowMode(){
@@ -60,6 +63,16 @@ public class DriverStation {
 
     //-----------------------second controller-----------------------------
 
+    boolean lateA2 = false;
+    public boolean getGamepad2A(){
+        boolean out;
+        out = gamepad2.a && !lateA2;
+        lateA2 = gamepad2.a;
+        return out;
+
+
+        }
+    }
     public double getSlidePower(){
         return -filterJoystick(gamepad2.left_stick_y);
     }
@@ -135,7 +148,7 @@ public class DriverStation {
         out = gamepad2.y && !lateY2;
         lateY2 = gamepad2.y;
         return out;
-    }
+    }*/
 //
 //    boolean lateX2 = false;
 //    public boolean getSlideLow() {

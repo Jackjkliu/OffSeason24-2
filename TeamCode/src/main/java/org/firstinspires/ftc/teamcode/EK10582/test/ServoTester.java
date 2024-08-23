@@ -14,15 +14,17 @@ public class ServoTester extends EKLinear {
     public void runOpMode() throws InterruptedException {
         waitForStart();
 
-        double targetPos = 0.5;
+        double targetPos1 = 0.5;
+        double targetPos2 = 0.5;
         while(opModeIsActive()) {
 
 
-            targetPos += gamepad1.right_stick_y * 0.0001;
-            Robot.getInstance().dumper.setPosition(targetPos);
+            targetPos1 += gamepad1.right_stick_y * 0.0001;
+            Robot.getInstance().leftClaw.setPosition(targetPos1);
 
 
-            telemetry.addData("Servo Position", targetPos);
+            telemetry.addData("Servo Position", targetPos1);
+            telemetry.addData("Servo Position",targetPos2);
             telemetry.update();
             //robot.update();
         }

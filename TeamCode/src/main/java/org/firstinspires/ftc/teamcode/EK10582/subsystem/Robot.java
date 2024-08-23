@@ -44,7 +44,7 @@ public class Robot {
 
     public DcMotorEx slide1;
     public DcMotorEx slide2;
-    public DcMotorEx intakeSpin;
+    //public DcMotorEx intakeSpin;
     public DcMotorEx hangingMotor;
 
     public BHI260IMU imu;
@@ -55,23 +55,27 @@ public class Robot {
     public Servo drone;
     public Servo hangingServo;
 
+    public Servo leftClaw;
+
+    public Servo rightClaw;
+
     public WebcamName camera;
     public OpenCvWebcam webcam;
 
 
     //Declare subsystems here: Ex. mecanumDrive, collection, slides, sorting, etc.
     public MecanumDrive mecanumDrive = new MecanumDrive();
-    public Claw intake = new Claw();
+    public Claw claw= new Claw();
     public Slides slides = new Slides();
     public OpenCV openCV = new OpenCV();
 
     //Add all subsystems to a list to be initiated and updated through
     //private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides, housing, openCV);
-    public List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, openCV, slides);
+    public List<Subsystem> subsystems = Arrays.asList(mecanumDrive, claw, openCV, slides);
 
     //add all subsystems that need to go through telemetry
 //    private List<Subsystem> telemetrySubsystems = Arrays.asList();
-    public List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, openCV, slides);
+    public List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, claw, openCV, slides);
 
 
     //Creates an arraylist called actions that stores all the actions that are currently being done

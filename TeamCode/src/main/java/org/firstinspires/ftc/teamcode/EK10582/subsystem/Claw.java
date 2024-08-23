@@ -5,7 +5,13 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 //child class of subsystem
 public class Claw extends Subsystem{
 
-    public double intakeSpeed, intakeBack;
+    public double openPosLeft;
+    public double closePosLeft;
+    public double openPosRight;
+    public double closePosRight;
+
+    public boolean clawOpen;
+    public boolean moveClaw;
 
     @Override
     public void init(boolean auton){
@@ -17,7 +23,24 @@ public class Claw extends Subsystem{
         if (auton) {
             return;
         }
-        Robot.getInstance().intakeSpin.setPower((intakeSpeed - intakeBack) * -0.8);
+        if(moveClaw){
+            if(clawOpen){
+                //set servo positions to close from open
+                Robot.getInstance().leftClaw.setPosition();
+                Robot.getInstance().rightClaw.setPosition();
+                clawOpen = false;
+            }
+            else {
+                //set servo positions to open from closed
+                Robot.getInstance().leftClaw.setPosition();
+                Robot.getInstance().rightClaw.setPosition();
+                clawOpen = true;
+            }
+            moveClaw = false;
+        }
+
+
+
     }
 
     @Override
@@ -27,7 +50,7 @@ public class Claw extends Subsystem{
 
     @Override
     public void printToTelemetry(Telemetry telemetry){
-        telemetry.addData("Spintake speed: ", intakeSpeed - intakeBack);
+        telemetry.addData("Claw Open: ", clawOpen);
 
     }
 
