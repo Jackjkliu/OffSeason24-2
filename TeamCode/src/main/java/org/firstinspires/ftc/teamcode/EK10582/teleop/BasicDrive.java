@@ -14,12 +14,7 @@ public class BasicDrive extends EKLinear {
     @Override
     public void runOpMode() {
         waitForStart();
-
-//        robot.pixelHolder.setPosition();
-
         while(opModeIsActive()) {
-
-
             robot.update();
         }
     }

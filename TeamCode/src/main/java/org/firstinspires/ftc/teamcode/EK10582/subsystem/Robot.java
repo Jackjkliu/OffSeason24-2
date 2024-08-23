@@ -98,27 +98,15 @@ public class Robot {
         rightFront.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-        slide1 = hardwareMap.get(DcMotorEx.class, "slide1");
-        slide2 = hardwareMap.get(DcMotorEx.class, "slide2");
-        slide1.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-        slide2.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-        slide1.setTargetPosition(0);
-        slide2.setTargetPosition(0);
-        slide2.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        slide1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        slide2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
+        // TODO: Set motor directions
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
-//        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
-//
+
         camera = hardwareMap.get(WebcamName.class, "Webcam 1");
         backboardDistanceSensor = hardwareMap.get(DistanceSensor.class, "backboardDistanceSensor");
         dumper = hardwareMap.get(Servo.class, "dumper");
         pixelHolder = hardwareMap.get(Servo.class, "pixelHolder");
         drone = hardwareMap.get(Servo.class, "drone");
-        intakeSpin = hardwareMap.get(DcMotorEx.class, "intakeSpin");
         hangingMotor = hardwareMap.get(DcMotorEx.class, "hanging");
         hangingServo = hardwareMap.get(Servo.class, "hangingServo");
 
